@@ -30,6 +30,13 @@ public class Comment extends Model{
 		this.postedOn = new Date();
 	}
 	
+	
+	/**
+	 * Get textual representation of post body
+	 * Automatically creates an excerpt if the body is
+	 * larger than 50 characters - appends "[...]"
+	 */
+	@Override
 	public String toString() {
 		if(body.length() > 50) {
 			return body.substring(0, 50) + "[...]";

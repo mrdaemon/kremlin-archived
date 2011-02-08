@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 
 import play.db.jpa.*;
@@ -12,7 +13,7 @@ public class Tag extends Model implements Comparable<Tag> {
 	public String name;
 	
 	private Tag(String name) {
-		this.name = name;
+		this.name = name.toLowerCase(Locale.ENGLISH);
 	}
 	
 	public static Tag findorCreateByName(String name) {
@@ -23,6 +24,7 @@ public class Tag extends Model implements Comparable<Tag> {
 		return tag;
 	}
 	
+	@Override
 	public String toString() {
 		return name;
 	}
