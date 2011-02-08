@@ -1,14 +1,13 @@
-Kremlin
-==============
+Kremlin Image Board System
+=======================
 
-Source code to the CMS/Community Services for glasnost.us.
+Source code to the Image Board system used by glasnost.us
 
 It performs
-
  * Stuff
  * Things
- * Security Vulnerabilities
+ * <del>Security Vulnerabilities</del>
  * Server Meltdown
- * Provides an excellent example of what not to do when writing Python code
+ * Provides an excellent example of what <del>not</del> to do when writing <del>Python</del> code
 
 **ALLERGY WARNING**: _May contain traces of KnifaCode (tm)_
