@@ -16,12 +16,20 @@ import play.test.Fixtures;
 import play.test.UnitTest;
 import utils.Checksum;
 
+import testutils.FixtureHelpers;
+
 public class ImageModelTests extends UnitTest {
 	
-	private String KNOWN_CHECKSUM = "ff1e363261ff8a0db1fb526cd6295c8a8212dd32";
-	private File f;
-	private String ftype;
+	private final String KNOWN_CHECKSUM =
+		"ff1e363261ff8a0db1fb526cd6295c8a8212dd32"; // SHA1 for "testimage.jpg"
 	
+	/* Fixtures */
+	private File f; // File reference for image to test 
+	private String ftype; // Above file's mimetype.
+	
+	/**
+	 * Setup fixtures before each test
+	 */
 	@Before
 	public void setup() {
 		Fixtures.deleteAll();
@@ -29,9 +37,14 @@ public class ImageModelTests extends UnitTest {
 		ftype = new MimetypesFileTypeMap().getContentType(f);
 	}
 	
+	/**
+	 * Cleanup fixtures after each test
+	 */
 	@After
 	public void clean() {
-		Fixtures.deleteAll();
+		FixtureHelpers.delortAllImageBlobs();
+		f = null;
+		ftype = null;
 	}
 	
 	@Test
@@ -45,6 +58,10 @@ public class ImageModelTests extends UnitTest {
 		testimg.filename = f.getName();
 		testimg.imagefile = imgblob;
 		testimg.save();
+		
+		// Fixtures cleanup hook, ensures created file
+		// gets deleted when test is done.
+		FixtureHelpers.registerImageBlob(testimg);
 		
 		// Tests
 		assertNotNull(testimg);
@@ -65,6 +82,9 @@ public class ImageModelTests extends UnitTest {
 		testimg.filename = f.getName();
 		testimg.imagefile = imgblob;
 		testimg.save();
+		
+		// Fixtures cleanup hook
+		FixtureHelpers.registerImageBlob(testimg);
 		
 		// Attempt to save a duplicate file.
 		// It should fail the Unique constraint.

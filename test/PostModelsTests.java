@@ -13,35 +13,25 @@ import play.db.jpa.Blob;
 import play.libs.*;
 import models.*;
 
+import testutils.FixtureHelpers;
+
 public class PostModelsTests extends UnitTest {
 	private User testUser;
 	private Image testImage;
-	
-	private Image createTestImage(String filename)
-				throws Exception {
-		File f = new File(getClass().getResource(filename).getFile());
-		String ftype = new MimetypesFileTypeMap().getContentType(f);
-		FileInputStream fis = new FileInputStream(f);
-		
-		Blob imgblob = new Blob();
-		imgblob.set(fis, ftype);
-		
-		Image img = new Image();
-		img.filename = filename;
-		img.imagefile = imgblob;
-		
-		if(fis != null) {
-			fis.close();
-		}
-		return img;
-	}
 	
 	@Before
 	public void setup() throws Exception {
 		Fixtures.deleteAll();
 		// Stand in user and image
 		testUser = new User("knifa@glasnost.us", "hunter2", "Knifa").save();
-		testImage = createTestImage("testimage.jpg").save();
+		testImage = FixtureHelpers.createTestImage("testimage.jpg").save();
+	}
+	
+	@After
+	public void cleanup() {
+		FixtureHelpers.delortAllImageBlobs();
+		testUser = null;
+		testImage = null;
 	}
 	
 	@Test
