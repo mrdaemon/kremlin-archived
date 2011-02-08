@@ -43,8 +43,6 @@ public class ImageModelTests extends UnitTest {
 	@After
 	public void clean() {
 		FixtureHelpers.delortAllImageBlobs();
-		f = null;
-		ftype = null;
 	}
 	
 	@Test
@@ -59,8 +57,9 @@ public class ImageModelTests extends UnitTest {
 		testimg.imagefile = imgblob;
 		testimg.save();
 		
-		// Fixtures cleanup hook, ensures created file
-		// gets deleted when test is done.
+		// FIXME: Fixtures cleanup hook, 
+		// ensures created file gets deleted when test is done.
+		// This is bad and I should feel bad. Sorry.
 		FixtureHelpers.registerImageBlob(testimg);
 		
 		// Tests
@@ -83,7 +82,7 @@ public class ImageModelTests extends UnitTest {
 		testimg.imagefile = imgblob;
 		testimg.save();
 		
-		// Fixtures cleanup hook
+		// FIXME: Fixtures cleanup hook
 		FixtureHelpers.registerImageBlob(testimg);
 		
 		// Attempt to save a duplicate file.
@@ -93,9 +92,13 @@ public class ImageModelTests extends UnitTest {
 		Blob dimgblob = new Blob();
 		dimgblob.set(dfis, ftype);
 		
+		// FIXME: Fixtures cleanup hook
+		FixtureHelpers.registerImageBlob(dimgblob);
+		
 		Image duplicateimg = new Image();
 		duplicateimg.filename = f.getName();
 		duplicateimg.imagefile = dimgblob;
 		duplicateimg.save();
+		
 	}
 }
