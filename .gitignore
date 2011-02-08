@@ -1,5 +1,14 @@
 /.classpath
 /.project
 /.settings
-/tmp
-/logs
+/eclipse/
+/test-result/
+/db/
+/tmp/
+/logs/
+/data/
+/doc/
+*.swp
+*~
+*.bak
+*.class
