@@ -3,6 +3,8 @@ package testutils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -16,6 +18,10 @@ import play.db.jpa.Blob;
  * {@link play.db.jpa.Blob Blob}s and instances of the Image model,
  * fully populated.
  * 
+ * Seriously, do not use this ever unless you have to. This class
+ * should be ditched ASAP in favor of clean fixtures once we have
+ * a solution to the file littering problem.
+ * 
  * Blobs are ridiculously annoying to populate due to how high level
  * they are, and they provide absolutely no way of deleting the file
  * they store in order to avoid transaction and database vs. filesystem
@@ -27,6 +33,7 @@ import play.db.jpa.Blob;
  * <p><em>NOT FOR PRODUCTION USE, HUMAN CONSUMPTION OR GENERAL 
  * HURR, HERPING AND DERPING! YOU HAVE BEEN WARNED!<em></p>
  * 
+ * <em>This design is absolutely terrifying, and the ugliest hack ever.</em>
  * 
  * @author Alexandre Gauthier
  * @see models.Image
@@ -36,7 +43,16 @@ public class FixtureHelpers {
 	private static final List<File> KNOWN_FILES; // Blob backed File registry
 	
 	static {
-		// Initialize the known files as an ArrayList
+		/* Initialize the known files as an ArrayList
+		 * ACCESS MUST BE THREADSAFE! Collections.SynchronizedList would
+		 * not really help here because we need to maintain state between
+		 * detached operations, and this is a test class anyways.
+		 * 
+		 * (JUnit is supposed to run in a single thread. I say Thread-Safe 
+		 *  but actually mean Atomic. It had to be synchronized because 
+		 *  static access from both Before/After and actual test cases turned
+		 *  out to be problematic and triggered inconsistent behavior.)
+		 */
 		KNOWN_FILES = new ArrayList<File>();
 	}
 	
@@ -64,7 +80,7 @@ public class FixtureHelpers {
 		 * 
 		 * This is just for unit tests so I can remain lazy and read
 		 * the resource files relevant for any test class in a semi-portable
-		 * way. I'm sorry, and I wouldn't really use that in production.
+		 * way. I'm sorry, and I wouldn't really use that in production code.
 		 */
 		String cname = new Throwable().fillInStackTrace().getStackTrace()[1]
 			                                                   .getClassName();
@@ -114,8 +130,8 @@ public class FixtureHelpers {
 	 */
 	public static void registerImageBlob(Blob blob) {
 		File f = blob.getFile();
-		if(!KNOWN_FILES.contains(f)){
-			KNOWN_FILES.add(f);
+		synchronized(KNOWN_FILES) {
+				KNOWN_FILES.add(f);
 		}
 	}
 	
@@ -124,10 +140,13 @@ public class FixtureHelpers {
 	 * Image instances, currently existing or not.
 	 */
 	public static void delortAllImageBlobs() {
-		if(!KNOWN_FILES.isEmpty()) {
-			for(File f: KNOWN_FILES){
-				KNOWN_FILES.remove(f);
-				deleteFile(f);
+		synchronized(KNOWN_FILES) {
+			if(!KNOWN_FILES.isEmpty()) {
+				Iterator<File> i = KNOWN_FILES.iterator();
+				while (i.hasNext()){
+					deleteFile(i.next());
+					i.remove();
+				}
 			}
 		}
 	}
@@ -150,9 +169,10 @@ public class FixtureHelpers {
 	 */
 	public static void delortImageBlob(Image img) {
 		File f = img.imagefile.getFile();
-		if(KNOWN_FILES.contains(f)){
-			KNOWN_FILES.remove(f);
-			deleteFile(f);
+		synchronized(KNOWN_FILES){
+				deleteFile(f);
+				KNOWN_FILES.remove(f);
+				
 		}
 	}
 	
