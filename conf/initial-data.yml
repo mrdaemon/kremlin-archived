@@ -1,0 +1,29 @@
+# This is a comment
+
+User(sys):
+  email: sys@glasnost.us
+  passwordHash: gCgLQx4gA1OTRZBd3IGo1g== # glasnost
+  name: System
+  
+ImagePost(firstpost):
+  note: Welcome to Kremlin. Enjoy this soothing picture.
+  postedOn: 2011-02-08
+  postedBy: sys
+  
+Comment(firstcomment):
+  author: Anonymous
+  postedOn: 2011-02-08
+  parent: firstpost
+  body: > 
+        Indeed, welcome! We're fresh out of the compiler.
+        
+Comment(secondcomment):
+  author: mr_daemon
+  postedOn: 2011-02-08
+  parent: firstpost
+  body: >
+        I suppose the next thing for you to do would be to, well, you know,
+        actually configure this fine piece of software.
+        
+        Eventually, I would venture to say that some kind of instructions
+        will be left here, and people will rejoice.
