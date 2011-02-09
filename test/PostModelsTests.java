@@ -37,7 +37,7 @@ public class PostModelsTests extends UnitTest {
 	@Test
 	public void storeAndLoadPost() {
 		// Create new image post
-		new ImagePost(testUser, "Hilarious Shenaningans", testImage).save();
+		new ImagePost(testImage, testUser, "Hilarious Shenaningans").save();
 		assertEquals(1, ImagePost.count()); // Validate store
 		
 		// Get all posts by user
@@ -50,7 +50,7 @@ public class PostModelsTests extends UnitTest {
 		assertEquals(1, userPosts.size());
 		assertNotNull(firstPost);
 		assertEquals(testUser, firstPost.postedBy);
-		assertEquals("Hilarious Shenaningans", firstPost.name);
+		assertEquals("Hilarious Shenaningans", firstPost.note);
 		assertEquals(testImage, firstPost.image);
 		assertEquals("testimage.jpg", firstPost.image.filename);
 		assertNotNull(firstPost.image.checksum);
@@ -60,8 +60,8 @@ public class PostModelsTests extends UnitTest {
 	@Test
 	public void storeAndLoadComments() {
 		// Create image post
-		ImagePost testPost = new ImagePost(testUser, "Hilarious Shenaningans",
-				testImage).save();
+		ImagePost testPost = new ImagePost(testImage, testUser,
+				"Hilarious Shenaningans").save();
 		
 		// Post anonymous comments
 		new Comment(testPost, "Anonymous", "OH GOD MY ANUS IS BLEEDING").save();

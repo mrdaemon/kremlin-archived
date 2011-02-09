@@ -20,7 +20,7 @@ import testutils.FixtureHelpers;
 
 public class ImageModelTests extends UnitTest {
 	
-	private final String KNOWN_CHECKSUM =
+	private static final String KNOWN_CHECKSUM =
 		"ff1e363261ff8a0db1fb526cd6295c8a8212dd32"; // SHA1 for "testimage.jpg"
 	
 	/* Fixtures */

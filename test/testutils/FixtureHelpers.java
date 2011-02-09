@@ -44,7 +44,7 @@ public class FixtureHelpers {
 	
 	static {
 		/* Initialize the known files as an ArrayList
-		 * ACCESS MUST BE THREADSAFE! Collections.SynchronizedList would
+		 * ACCESS MUST BE THREAD-SAFE! Collections.SynchronizedList would
 		 * not really help here because we need to maintain state between
 		 * detached operations, and this is a test class anyways.
 		 * 
@@ -79,7 +79,7 @@ public class FixtureHelpers {
 		 * getting the resource files off that. Oh god.
 		 * 
 		 * This is just for unit tests so I can remain lazy and read
-		 * the resource files relevant for any test class in a semi-portable
+		 * the relevant resource files for any test class in a semi-portable
 		 * way. I'm sorry, and I wouldn't really use that in production code.
 		 */
 		String cname = new Throwable().fillInStackTrace().getStackTrace()[1]

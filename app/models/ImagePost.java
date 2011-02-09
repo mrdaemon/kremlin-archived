@@ -5,10 +5,12 @@ import java.util.*;
 import javax.persistence.*;
 
 import play.db.jpa.*;
+import play.data.validation.*;
 
 @Entity
 public class ImagePost extends Model {
-	public String name;
+	@MaxSize(140)
+	public String note;
 	public Date postedOn;
 	
 	@ManyToOne
@@ -23,10 +25,11 @@ public class ImagePost extends Model {
 	@OneToOne
 	public Image image;
 	
-	public ImagePost(User author, String name, Image image) {
-		this.postedBy = author;
-		this.name = name;
+	public ImagePost(Image image, User author, String note) {
 		this.image = image;
+		this.note = note;
+		this.postedBy = author;
 		this.postedOn = new Date();
+		this.comments = new ArrayList<Comment>();
 	}
 }
