@@ -13,3 +13,5 @@
 *.bak
 *.class
 .recommenders/
+/.checkstyle
+/javadoc/
