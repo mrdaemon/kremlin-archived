@@ -10,7 +10,11 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-        render();
+        ImagePost latest = ImagePost.find("order by postedOn desc").first();
+        List<ImagePost> previous = ImagePost.find(
+        		"order by postedOn desc"
+        		).from(1).fetch(10);
+        render(latest, previous);
     }
 
 }
