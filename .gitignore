@@ -15,3 +15,4 @@
 .recommenders/
 /.checkstyle
 /javadoc/
+/nbproject/
