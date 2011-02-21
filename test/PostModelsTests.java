@@ -30,8 +30,6 @@ public class PostModelsTests extends UnitTest {
 	@After
 	public void cleanup() {
 		FixtureHelpers.delortAllImageBlobs();
-		testUser = null;
-		testImage = null;
 	}
 	
 	@Test

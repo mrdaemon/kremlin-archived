@@ -1,0 +1,295 @@
+/* 
+  html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+  v1.4 2009-07-27 | Authors: Eric Meyer & Richard Clark
+  html5doctor.com/html-5-reset-stylesheet/
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, figure, footer, header, 
+hgroup, menu, nav, section, menu,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}                  
+
+article, aside, figure, footer, header, 
+hgroup, nav, section { display:block; }
+
+nav ul { list-style:none; }
+
+blockquote, q { quotes:none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content:''; content:none; }
+
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+
+ins { background-color:#ff9; color:#000; text-decoration:none; }
+
+mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom:1px dotted #000; cursor:help; }
+
+/* tables still need cellspacing="0" in the markup */
+table { border-collapse:collapse; border-spacing:0; }
+
+hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
+
+input, select { vertical-align:middle; }
+/* END RESET CSS */
+
+
+/*
+fonts.css from the YUI Library: developer.yahoo.com/yui/
+          Please refer to developer.yahoo.com/yui/fonts/ for font sizing percentages
+
+There are three custom edits:
+ * remove arial, helvetica from explicit font stack
+ * make the line-height relative and unit-less
+ * remove the pre, code styles
+*/
+body { font:13px sans-serif; *font-size:small; *font:x-small; line-height:1.22; }
+
+table { font-size:inherit; font:100%; }
+
+select, input, textarea { font:99% sans-serif; }
+
+
+/* normalize monospace sizing 
+ * en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
+ */
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+ 
+
+/* #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */ 
+body, select, input, textarea { color:#444; }
+
+/* Headers (h1,h2,etc) have no default font-size or margin,
+   you'll want to define those yourself. */ 
+ 
+/* www.aestheticallyloyal.com/public/optimize-legibility/ */ 
+/*h1,h2,h3,h4,h5,h6 { font-weight: bold; text-rendering: optimizeLegibility; }*/
+
+/* maxvoltar.com/archive/-webkit-font-smoothing */
+/*html { -webkit-font-smoothing: antialiased; }*/
+
+sub { vertical-align: sub; font-size: smaller; }
+sup { vertical-align: super; font-size: smaller; }
+
+pre { 
+  padding: 15px; 
+  /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+  white-space: pre; /* CSS2 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word; /* IE */
+}
+
+/* align checkboxes, radios, text inputs with their label
+   by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+input[type="radio"] { vertical-align: text-bottom; }
+input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
+.ie6 input { vertical-align: text-bottom; }
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+
+/* always force a scrollbar in non-IE */
+html { overflow-y: scroll; }
+
+/* make buttons play nice in IE:    
+   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button {  width: auto; overflow: visible; }
+ 
+/* bicubic resizing for non-native sized IMG: 
+   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.ie7 img { -ms-interpolation-mode: bicubic; }
+
+/* >> The Magnificent CLEARFIX << */
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; } /* Hides from IE-mac \*/
+.clearfix { display: block; }
+
+
+@font-face {
+	font-family: 'MolotRegular';
+	src: url('Molot-webfont.eot');
+	src: local('☺'), url('assets/Molot-webfont.woff') format('woff'), url('assets/Molot-webfont.ttf') format('truetype'), url('assets/Molot-webfont.svg#webfont1MPehqUu') format('svg');
+}
+
+
+body{
+	/* Setting default text color, background and a font stack */
+	color:#cccccc;
+	font-size:0.825em;
+	background: url(img/bodyBg.png) repeat #252525;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+.menuUL li{
+	/* This will arrange the LI-s next to each other */
+	display:inline;
+}
+
+.menuUL li a,.menuUL li a:visited{
+	/* Styling the hyperlinks of the menu as buttons */
+	
+	float:left;
+	font-weight:bold;
+	background:url(img/button_bg.jpg) repeat-x center bottom #666666;
+	
+	/* display:block allows for additinal CSS rules to take effect, such as paddings: */
+	display:block;
+	border:1px solid #4D4D4D;
+	color:#CCCCCC;
+	border-top-color:#565656;
+	
+	padding:4px 6px;
+	margin:4px 5px;
+	height:16px;
+	
+	/* Setting a CSS3 box shadow around the button */
+	
+	-moz-box-shadow:0 0 1px black;
+	-webkit-box-shadow:0 0 1px black;
+	box-shadow:0 0 1px black;
+	
+	/* CSS3 text shadow */
+	text-shadow:0 1px black;
+
+}
+
+.menuUL li a:hover{
+	/* On hover show the top, lighter, part of the background: */
+	background-position:center top;
+	text-decoration:none;
+}
+
+#navigation{
+	/* The navigation menu bar: */
+  	background:url(img/divBg.png);
+	border:1px solid #111111;
+	float:left;
+	padding:5px 10px;
+}
+
+#navigation,.menuUL li a{
+	/* CSS3 rounded corners for both the navigation bar and the buttons: */
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	-khtml-border-radius:4px;
+	border-radius:4px;
+}
+
+#stage{
+	/* The stage contains the individual divs that comprise the halftone icon: */
+	height:300px;
+	position:absolute;
+	left:30px;
+	top:80px;
+	width:400px;
+}
+
+.dot{
+	/* The stage contains 192 .dot divs: */
+	float:left;
+	height:25px;
+	width:25px;
+}
+
+.dot.active{
+	/* When assigned the active class, the div shows a background image of a dot: */
+	background:url(img/dot.png) no-repeat center center;
+}
+
+#main{
+	margin:0 auto;
+	position:relative;
+	width:900px;
+}
+
+img.logo{
+  position: absolute;
+  bottom: 0;
+  right:0;
+  padding: -30px; 0;
+  width: 405px;
+  z-index: -1;
+}
+
+
+#footer {
+	position: absolute;
+	bottom:0;
+	left:0;
+	padding: 5px 10px;
+}
+
+#footer p{
+	font-size: 0.8em;
+	font-weight: normal;
+
+}
+
+.footer-icons li{
+	padding: 5px 2px;
+	display: inline;
+	float-left;
+}
+
+
+h1{
+	background:#222222;
+	border-bottom:1px solid black;
+	font-size:1.5em;
+	font-weight:normal;
+	margin-bottom:15px;
+	padding:15px;
+	text-align:center;
+	background:url(img/divBg.png)
+}
+
+h2 {
+	font-size:2em;
+	font-family: "MolotRegular", Arial, sans-serif;
+	font-weight:normal;
+	/* padding-right:40px; */
+	padding-top: 16px;
+	position:relative;
+	right:0;
+	text-align:center;
+	text-transform:uppercase;
+	text-shadow:3px 3px black;
+	top:-48px;
+}
+/* Fixed the god damned stars. */
+h2 i { 
+	font-family: arial, helvetica, sans-serif; 
+	font-style: normal; 
+}
+
+a, a:visited {
+	color:#0196e3;
+	text-decoration:none;
+	outline:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}

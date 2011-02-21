@@ -1,4 +1,45 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Latest Image' /}
 
-#{welcome /}
+#{if latest}
+    <div class="post">
+        <h2 class="post-note">
+            <a href="#">${latest.note}</a>
+        </h2>
+        <div class="post-metadata">
+            <span class="post-postedby">posted by ${latest.postedBy.name}</span>
+            <span class="post-date">${latest.postedOn.format('MMM dd')}</span>
+            <span class="post-comments">
+                &nbsp;|&nbsp;
+                ${latest.comments.size() ?: 'No'}
+                comment${latest.comments.size().pluralize()}
+                #{if latest.comments}
+                    , latest by ${latest.comments[0].author}
+                #{/if}
+                #{else}
+                    .
+                #{/else}
+            </span>
+        </div>
+        <div class="post-content">
+            <img src=@{ImageRenderer.renderPostImage(latest.image.id)}>
+        </div>
+    </div>
+    
+    #{if previous.size() > 1}
+        <div class="previous-images">
+            <h3>Previous images <span class="from">from glasnost</h3>
+            #{list items:previous, as:'previousimage'}
+                <div class="post">
+                    <h2>Some Pictar Note Here</h2>
+                </div>
+            #{/list}
+            </h3>
+        </div>
+    #{/if}
+#{/if}
+#{else}
+   <div class="empty">
+       OH NOES - there are no images :(
+   </div>
+#{/else}
