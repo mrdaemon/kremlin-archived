@@ -3,6 +3,7 @@ import java.util.*;
 import play.test.*;
 import play.libs.*;
 import models.*;
+import testutils.FixtureHelpers;
 
 
 public class UserModelTests extends UnitTest {
@@ -10,6 +11,11 @@ public class UserModelTests extends UnitTest {
 	@Before
 	public void setup() {
 		Fixtures.deleteAll();
+	}
+	
+	@After
+	public void clean() {
+		FixtureHelpers.delortAllImageBlobs();
 	}
 	
 	/**

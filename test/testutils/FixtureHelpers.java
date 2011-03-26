@@ -10,6 +10,8 @@ import java.util.List;
 import javax.activation.MimetypesFileTypeMap;
 
 import models.Image;
+import models.ImagePost;
+import play.Logger;
 import play.db.jpa.Blob;
 
 /**
@@ -54,6 +56,18 @@ public class FixtureHelpers {
 		 *  out to be problematic and triggered inconsistent behavior.)
 		 */
 		KNOWN_FILES = new ArrayList<File>();
+		
+		/* Automagically add the image created at runtime by first boot
+		 * to the list of files that should be cleaned up, else it will
+		 * be tragically left behind and no one wishes to end up with
+		 * exactly 87 Richard Stallmans in their data directories. 
+		 */
+		if(ImagePost.count() == 1) {
+			Logger.info("FixtureHelpers: Tracking first boot image blob");
+			List<ImagePost> storedPosts = ImagePost.findAll();
+			KNOWN_FILES.add(storedPosts.get(0).image.imagefile.getFile());
+		}
+			
 	}
 	
 	/**
